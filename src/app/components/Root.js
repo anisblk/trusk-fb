@@ -40,23 +40,12 @@ export class Root extends React.Component {
     }
 
     componentWillMount() {
-        if (this.props.params.next) {
-            this.getRatings(this.props.params.next);
-        }
-        else {
-            // no param in the url
-            this.getRatings("");
-        }
+      this.getRatings(this.props.params.next || "");
     }
 
     // Gets the new url and sends the param "next" to request next ratings
     componentWillReceiveProps(nextProps) {
-        if (nextProps.params.next) {
-            this.getRatings(nextProps.params.next);
-        }
-        else {
-            this.getRatings("");
-        }
+      this.getRatings(nextProps.params.next || "");
     }
 
     componentDidUpdate() {
