@@ -4,6 +4,7 @@ import {Card, CardHeader, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import FontAwesome from 'react-fontawesome';
 import { browserHistory, Link } from "react-router";
+import moment from 'moment';
 
 let FB_ACCESS_TOKEN = "CAAbiZCqFSoHsBAC2ZBWiDTJ9q9q3gPfN1RxEjUGK7LcO80ZBQ4i804fQ5X6aZAmYa6tpHNJkuyI8lXLKzfZCgLNOaJNTi4GqWEKZAn4rZBaWrvnAkUJsLoWpwlktDhSUKMMDBjyfgrgGyjK5TzbmvZBAugvwReVzh7ZC3nwANFSJG1IrsI2aFe5upkeiv8sZCO4ZAAZD";
 let FB_RATINGS_URL = "https://graph.facebook.com/v2.5/truskapp/ratings";
@@ -18,7 +19,7 @@ let Rating = ({ ratingData }) => {
         <Card style={{marginBottom: '30px'}}>
             <CardHeader
                 title={<div>{ratingData.reviewer.name} {ratingData.rating} {Star} </div>}
-                subtitle={ratingData.created_time}
+                subtitle={moment(ratingData.created_time).format('DD MMMM YYYY')}
                 avatar={AVATAR_URL}
             />
             <CardText>
