@@ -8,6 +8,27 @@ import { browserHistory, Link } from "react-router";
 let FB_ACCESS_TOKEN = "CAAbiZCqFSoHsBAC2ZBWiDTJ9q9q3gPfN1RxEjUGK7LcO80ZBQ4i804fQ5X6aZAmYa6tpHNJkuyI8lXLKzfZCgLNOaJNTi4GqWEKZAn4rZBaWrvnAkUJsLoWpwlktDhSUKMMDBjyfgrgGyjK5TzbmvZBAugvwReVzh7ZC3nwANFSJG1IrsI2aFe5upkeiv8sZCO4ZAAZD";
 let FB_RATINGS_URL = "https://graph.facebook.com/v2.5/truskapp/ratings";
 
+let Star = <FontAwesome className="fa fa-star" name="" style={{color: '#5890FF'}}/>;
+
+let Rating = ({ ratingData }) => {
+  let AVATAR_URL = `https://graph.facebook.com/${ratingData.reviewer.id}/picture?type=square`;
+  return (
+    <div className="col-sm-12" key={ratingData.reviewer.id}>
+        {/* displays a nice card */}
+        <Card style={{marginBottom: '30px'}}>
+            <CardHeader
+                title={<div>{ratingData.reviewer.name} {ratingData.rating} {Star} </div>}
+                subtitle={ratingData.created_time}
+                avatar={AVATAR_URL}
+            />
+            <CardText>
+                {ratingData.review_text}
+            </CardText>
+        </Card>
+      </div>
+  );
+}
+
 export class Root extends React.Component {
 
     constructor() {
@@ -91,25 +112,8 @@ export class Root extends React.Component {
     }
 
     render() {
-        var star = <FontAwesome className="fa fa-star" name="" style={{color: '#5890FF'}}/>;
         // this will loop on the ratings
-        var ratings = this.state.ratings.map((rating) => {
-            return(
-                <div className="col-sm-12" key={rating.reviewer.id}>
-                    {/* displays a nice card */}
-                    <Card style={{marginBottom: '30px'}}>
-                        <CardHeader
-                            title={<div>{rating.reviewer.name} {rating.rating} {star} </div>}
-                            subtitle={this.formattedDate(rating.created_time)}
-                            avatar={"https://graph.facebook.com/" + rating.reviewer.id + "/picture?type=square"}
-                        />
-                        <CardText>
-                            {rating.review_text}
-                        </CardText>
-                    </Card>
-                </div>
-            )
-        });
+        var ratings = this.state.ratings.map((rating) => <Rating ratingData={rating} key={rating.created_time} />);
         return (
             <div className="container">
                 <Link to={"/"}>
