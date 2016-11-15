@@ -76,27 +76,6 @@ export class Root extends React.Component {
         });
     }
 
-    formattedDate(date) {
-        var d = new Date(date || Date.now()),
-            month = '' + (d.getMonth() + 1),
-            day = '' + d.getDate();
-
-        if (month == 12) month = 'décembre';
-        if (month == 11) month = 'novembre';
-        if (month == 10) month = 'octobre';
-        if (month == 9) month = 'septembre';
-        if (month == 8) month = 'août';
-        if (month == 7) month = 'juillet';
-        if (month == 6) month = 'juin';
-        if (month == 5) month = 'mai';
-        if (month == 4) month = 'avril';
-        if (month == 3) month = 'mars';
-        if (month == 2) month = 'février';
-        if (month == 1) month = 'janvier';
-
-        return [day, month].join(' ');
-    }
-
     nextPage() {
         browserHistory.push("/?url=" + this.state.next);
     }
