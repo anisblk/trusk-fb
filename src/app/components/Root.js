@@ -1,6 +1,5 @@
 import React from "react";
 import Request from "superagent";
-import _ from "lodash";
 import {Card, CardHeader, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import FontAwesome from 'react-fontawesome';
@@ -10,7 +9,9 @@ export class Root extends React.Component {
 
     constructor() {
         super();
-        this.state = {};
+        this.state = {
+          ratings: [],
+        };
     }
 
     componentWillMount() {
@@ -85,7 +86,7 @@ export class Root extends React.Component {
     render() {
         var star = <FontAwesome className="fa fa-star" name="" style={{color: '#5890FF'}}/>;
         // this will loop on the ratings
-        var ratings = _.map(this.state.ratings, (rating) => {
+        var ratings = this.state.ratings.map((rating) => {
             return(
                 <div className="col-sm-12" key={rating.reviewer.id}>
                     {/* displays a nice card */}
