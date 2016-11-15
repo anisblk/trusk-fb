@@ -13,12 +13,6 @@ class App extends  React.Component {
             <MuiThemeProvider>
                 <Router history={browserHistory}>
                     <Route path={"/(:next)"} component={Root}>
-                    {/*<div className="container">*/}
-                        {/*<h1>Trusk Ratings</h1>*/}
-                        {/*<hr />*/}
-                        {/*<br />*/}
-                        {/*<Root/>*/}
-                    {/*</div>*/}
                     </Route>
                 </Router>
             </MuiThemeProvider>
