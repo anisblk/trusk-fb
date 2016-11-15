@@ -5,6 +5,9 @@ import FlatButton from 'material-ui/FlatButton';
 import FontAwesome from 'react-fontawesome';
 import { browserHistory, Link } from "react-router";
 
+let FB_ACCESS_TOKEN = "CAAbiZCqFSoHsBAC2ZBWiDTJ9q9q3gPfN1RxEjUGK7LcO80ZBQ4i804fQ5X6aZAmYa6tpHNJkuyI8lXLKzfZCgLNOaJNTi4GqWEKZAn4rZBaWrvnAkUJsLoWpwlktDhSUKMMDBjyfgrgGyjK5TzbmvZBAugvwReVzh7ZC3nwANFSJG1IrsI2aFe5upkeiv8sZCO4ZAAZD";
+let FB_RATINGS_URL = "https://graph.facebook.com/v2.5/truskapp/ratings";
+
 export class Root extends React.Component {
 
     constructor() {
@@ -40,14 +43,18 @@ export class Root extends React.Component {
     }
 
     getRatings(next) {
-        var fb_page_access_token = "CAAbiZCqFSoHsBAC2ZBWiDTJ9q9q3gPfN1RxEjUGK7LcO80ZBQ4i804fQ5X6aZAmYa6tpHNJkuyI8lXLKzfZCgLNOaJNTi4GqWEKZAn4rZBaWrvnAkUJsLoWpwlktDhSUKMMDBjyfgrgGyjK5TzbmvZBAugvwReVzh7ZC3nwANFSJG1IrsI2aFe5upkeiv8sZCO4ZAAZD";
-        var url = "https://graph.facebook.com/v2.5/truskapp/ratings?access_token=" + fb_page_access_token + "&format=json&limit=25";
+        let queryParameters = {
+          access_token: FB_ACCESS_TOKEN,
+          format: 'json',
+          limit: 25,
+        };
 
         // adds an "after" param to the url
-        if (next != "") {
-            url += "&after=" + next;
+        if (next) {
+          queryParameters.after = next;
         }
-        Request.get(url).then((response) => {
+
+        Request.get(FB_RATINGS_URL).query(queryParameters).then((response) => {
             console.log(response);
             this.setState({
                 // store all the ratings
